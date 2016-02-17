@@ -20,9 +20,9 @@ def build_random_function(min_depth, max_depth):
     []
 
     """
-    function_list = ['prod', 'avg', 'cos_pi', 'sin_pi']
+    function_list = ['prod', 'avg', 'cos_pi', 'sin_pi', 'exp', 'atan']
     function_list2 = ['x', 'y']
-    function_list3 = ['prod', 'avg', 'cos_pi', 'sin_pi', 'x', 'y']
+    function_list3 = ['prod', 'avg', 'cos_pi', 'sin_pi', 'exp', 'exp_cos', 'x', 'y']
     new_list = []
 
 
@@ -48,6 +48,10 @@ def build_random_function(min_depth, max_depth):
     elif function1 == 'cos_pi':
         new_list.append(build_random_function(min_depth-1, max_depth-1))
     elif function1 == 'sin_pi':
+        new_list.append(build_random_function(min_depth-1, max_depth-1))
+    elif function1 == 'exp':
+        new_list.append(build_random_function(min_depth-1, max_depth-1))
+    elif function1 == 'atan':
         new_list.append(build_random_function(min_depth-1, max_depth-1))
 
     return new_list
@@ -87,7 +91,12 @@ def evaluate_random_function(f, x, y):
         argument1 = evaluate_random_function(f[1], x, y)
         argument2 = evaluate_random_function(f[2], x, y)
         return argument1*argument2
-        
+    elif f[0] == 'exp':
+        argument1 = evaluate_random_function(f[1], x, y)
+        return math.exp(argument1)
+    elif f[0] == 'atan':
+        argument1 = evaluate_random_function(f[1], x, y)
+        return math.atan(argument1)
 
     # TODO: implement this
     pass
@@ -208,7 +217,7 @@ if __name__ == '__main__':
     # Create some computational art!
     # TODO: Un-comment the generate_art function call after you
     #       implement remap_interval and evaluate_random_function
-    generate_art("myart5.png")
+    generate_art("myart15.png")
 
     # Test that PIL is installed correctly
     # TODO: Comment or remove this function call after testing PIL install
