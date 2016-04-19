@@ -36,25 +36,12 @@ def build_random_function(min_depth, max_depth):
     else:
         function1 = random.choice(function_list2)
 
-    new_list.append(function1) #adds the first function to the list
-
     #Recusive steps that add arguments for each function 
-    if function1 == 'prod':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-    elif function1 == 'avg':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-    elif function1 == 'cos_pi':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-    elif function1 == 'sin_pi':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-    elif function1 == 'exp':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-    elif function1 == 'atan':
-        new_list.append(build_random_function(min_depth-1, max_depth-1))
-
-    return new_list
+    if function1 == ['prod', 'avg']:
+        return [function1, (build_random_function(min_depth-1, max_depth-1)]
+        return [function1, (build_random_function(min_depth-1, max_depth-1)]
+    elif function1 == ['cos_pi', 'sin_pi', 'exp', 'atan']:
+        return [function1, (build_random_function(min_depth-1, max_depth-1)]
 
 
 def evaluate_random_function(f, x, y, t):
@@ -100,8 +87,6 @@ def evaluate_random_function(f, x, y, t):
         argument1 = evaluate_random_function(f[1], x, y, t)
         return math.atan(argument1)
 
-    # TODO: implement this
-    pass
 
 
 def remap_interval(val,
@@ -139,9 +124,6 @@ def remap_interval(val,
     output_difference = output_interval_end - float(output_interval_start)
     answer = (percentage * output_difference) + output_interval_start
     return answer
-
-    # TODO: implement this
-    pass
 
 
 def color_map(val):
@@ -217,16 +199,7 @@ def generate_art(x_size=350, y_size=350, t_size=100):
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
-
-    # Create some computational art!
-    # TODO: Un-comment the generate_art function call after you
-    #       implement remap_interval and evaluate_random_function
     generate_art()
-
-    # Test that PIL is installed correctly
-    # TODO: Comment or remove this function call after testing PIL install
-
-    #test_image("noise.png")
 
 
 #print(build_random_function(1, 5))
