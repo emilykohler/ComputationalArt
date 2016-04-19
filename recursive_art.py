@@ -23,25 +23,27 @@ def build_random_function(min_depth, max_depth):
     function_list = ['prod', 'avg', 'cos_pi', 'sin_pi', 'exp', 'atan']
     function_list2 = ['x', 'y', 't']
     function_list3 = ['prod', 'avg', 'cos_pi', 'sin_pi', 'exp', 'exp_cos', 'x', 'y', 't']
-    new_list = []
-
 
     # base cases to stop recursion when necessary/ when the max_depth is reached
-    if 0 < min_depth:
-        function1 = random.choice(function_list)
-    elif 0 < max_depth:
-        function1 = random.choice(function_list)
-    elif min_depth == 0:
-        return new_list
+    # if min_depth > 0:
+    #     function1 = random.choice(function_list)
+    # elif max_depth > 0:
+    #     function1 = random.choice(function_list3)
+    # else:
+    #     function1 = random.choice(function_list2)
+    random1 = random.choice(function_list)
+    random2 = random.choice(function_list2)
+    depth = random.randint(min_depth, max_depth) 
+    if depth == 0:
+        return []
+    elif depth == 1:
+        return random2
     else:
-        function1 = random.choice(function_list2)
+        if random1 in ['prod', 'avg']:
+            return [random1, build_random_function(min_depth-1, max_depth-1), build_random_function(min_depth-1, max_depth-1)]
+        elif random1 in ['cos_pi', 'sin_pi', 'exp', 'atan']:
+            return [random1, build_random_function(min_depth-1, max_depth-1)]
 
-    #Recusive steps that add arguments for each function 
-    if function1 == ['prod', 'avg']:
-        return [function1, (build_random_function(min_depth-1, max_depth-1)]
-        return [function1, (build_random_function(min_depth-1, max_depth-1)]
-    elif function1 == ['cos_pi', 'sin_pi', 'exp', 'atan']:
-        return [function1, (build_random_function(min_depth-1, max_depth-1)]
 
 
 def evaluate_random_function(f, x, y, t):
@@ -86,7 +88,6 @@ def evaluate_random_function(f, x, y, t):
     elif f[0] == 'atan':
         argument1 = evaluate_random_function(f[1], x, y, t)
         return math.atan(argument1)
-
 
 
 def remap_interval(val,
@@ -174,9 +175,9 @@ def generate_art(x_size=350, y_size=350, t_size=100):
         x_size, y_size: optional args to set image dimensions (default: 350)
     """
     # Functions for red, green, and blue channels - where the magic happens!
-    red_function = build_random_function(7, 9)
-    green_function = build_random_function(7, 9)
-    blue_function = build_random_function(7, 9)
+    red_function = build_random_function(3, 3)
+    green_function = build_random_function(3, 3)
+    blue_function = build_random_function(3, 3)
 
     # Create image and loop over all pixels
     im = Image.new("RGB", (x_size, y_size))
